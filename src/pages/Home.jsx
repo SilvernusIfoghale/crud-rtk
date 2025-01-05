@@ -13,12 +13,15 @@ const Home = () => {
           <td className="w-32 border-2 p-2">{user.name}</td>
           <td className="w-32 border-2 p-2">{user.email}</td>
           <td className="w-52 border-2 p-2 ">
-            <button className="bg-blue-500 text-white py-1 px-4 rounded-md m-1">
+            <NavLink
+              to={`/edit/${user.id}`}
+              className="bg-blue-500 text-white py-1 px-4 rounded-md m-1"
+            >
               Edit
-            </button>
-            <button className="bg-red-500 text-white py-1 px-4 rounded-md m-1">
+            </NavLink>
+            <NavLink className="bg-red-500 text-white py-1 px-4 rounded-md m-1">
               Delete
-            </button>
+            </NavLink>
           </td>
         </tr>
       </tbody>

@@ -1,30 +1,36 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { addUser } from "../Redux/user/userSlice";
-import { useNavigate } from "react-router";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate, useParams } from "react-router";
+import { editUser, userState } from "../Redux/user/userSlice";
 
-const Create = () => {
-  const navigate = useNavigate();
+const Edit = () => {
+  const { id } = useParams();
+  const user = useSelector(userState);
   const dispatch = useDispatch();
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
+  const navigate = useNavigate();
+  const currentUser = user.filter((user) => user.id == id);
+  const { name, email } = currentUser[0];
+  const [data, setData] = useState({
+    name,
+    email,
   });
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(addUser(formData.name, formData.email));
+    dispatch(editUser({ id, name: data.name, email: data.email }));
     navigate("/");
+  };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setData({ ...data, [name]: value });
   };
   return (
     <>
       <div className="flex justify-center items-center h-[100vh] m-3">
         <div className="border-2 bg-slate-100 w-[360px] sm:w-[530px] h-96  flex flex-col px-10 sm:px-16 justify-center">
           <h1 className="font-bold text-gray-800 text-2xl mb-4 text-center">
-            Add User 👨‍💻
+            Edit User 👨‍💻
           </h1>
           <form onSubmit={handleSubmit}>
             <div className="my-4">
@@ -37,7 +43,7 @@ const Create = () => {
                 name="name"
                 placeholder="John Doe"
                 className="border-2 w-full p-1.5 rounded-md"
-                value={formData.name}
+                value={data.name}
                 onChange={handleChange}
               />
             </div>
@@ -49,7 +55,7 @@ const Create = () => {
                 type="text"
                 id="email"
                 name="email"
-                value={formData.email}
+                value={data.email}
                 onChange={handleChange}
                 className="border-2 w-full p-1.5 rounded-md"
               />
@@ -69,4 +75,4 @@ const Create = () => {
   );
 };
 
-export default Create;
+export default Edit;

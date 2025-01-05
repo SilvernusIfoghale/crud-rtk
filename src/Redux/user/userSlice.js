@@ -19,9 +19,17 @@ const userSlice = createSlice({
         };
       },
     },
+    editUser: (state, action) => {
+      const { id, name, email } = action.payload;
+      const editUser = state.find((user) => user.id == id);
+      if (editUser) {
+        editUser.name = name;
+        editUser.email = email;
+      }
+    },
   },
 });
 
-export const { addUser } = userSlice.actions;
+export const { addUser, editUser } = userSlice.actions;
 export const userState = (state) => state.users;
 export default userSlice.reducer;
