@@ -2,6 +2,8 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteUser, userState } from "../Redux/user/userSlice";
 import { NavLink } from "react-router-dom";
+import { FaEdit } from "react-icons/fa";
+import { MdDeleteForever } from "react-icons/md";
 
 const Home = () => {
   const users = useSelector(userState);
@@ -11,23 +13,23 @@ const Home = () => {
   };
   const allUsers = users.map((user, index) => {
     return (
-      <tbody key={index}>
+      <tbody key={index} className="text-center">
         <tr>
-          <td className="w-10 border-2 p-2">{index + 1}</td>
-          <td className="w-32 border-2 p-2">{user.name}</td>
-          <td className="w-32 border-2 p-2">{user.email}</td>
-          <td className="w-52 border-2 p-2 ">
+          <td className="w-10 border-b-2 p-2">{index + 1}</td>
+          <td className="w-32 border-b-2 p-2">{user.name}</td>
+          <td className="w-40 border-b-2 p-2">{user.email}</td>
+          <td className="w-28 border-b-2 p-2 flex items-center justify-center">
             <NavLink
               to={`/edit/${user.id}`}
-              className="bg-blue-500 text-white py-1 px-4 rounded-md m-1"
+              className="text-blue-500 text-2xl m-1 inline-block hover:scale-[110%]"
             >
-              Edit
+              <FaEdit />
             </NavLink>
             <button
               onClick={() => handleDelete(user.id)}
-              className="bg-red-500 text-white py-1 px-4 rounded-md m-1"
+              className="text-red-500 text-2xl m-1 hover:scale-[110%]"
             >
-              Delete
+              <MdDeleteForever />
             </button>
           </td>
         </tr>
@@ -51,10 +53,10 @@ const Home = () => {
             <table>
               <thead>
                 <tr>
-                  <th className="w-10 border-2 p-2">S/N</th>
-                  <th className="w-32 border-2 p-2">Name</th>
-                  <th className="w-32 border-2 p-2">E-mail</th>
-                  <th className="w-32 border-2 p-2">Action</th>
+                  <th className="w-10 border-b-2 p-2">S/N</th>
+                  <th className="w-32 border-b-2 p-2">Name</th>
+                  <th className="w-40 border-b-2 p-2">E-mail</th>
+                  <th className="w-28 border-b-2 p-2">Action</th>
                 </tr>
               </thead>
               {allUsers}
