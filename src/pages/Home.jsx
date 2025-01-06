@@ -1,10 +1,14 @@
 import React from "react";
-import { useSelector } from "react-redux";
-import { userState } from "../Redux/user/userSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { deleteUser, userState } from "../Redux/user/userSlice";
 import { NavLink } from "react-router-dom";
 
 const Home = () => {
   const users = useSelector(userState);
+  const dispatch = useDispatch();
+  const handleDelete = (id) => {
+    dispatch(deleteUser({ id }));
+  };
   const allUsers = users.map((user, index) => {
     return (
       <tbody key={index}>
@@ -19,9 +23,12 @@ const Home = () => {
             >
               Edit
             </NavLink>
-            <NavLink className="bg-red-500 text-white py-1 px-4 rounded-md m-1">
+            <button
+              onClick={() => handleDelete(user.id)}
+              className="bg-red-500 text-white py-1 px-4 rounded-md m-1"
+            >
               Delete
-            </NavLink>
+            </button>
           </td>
         </tr>
       </tbody>

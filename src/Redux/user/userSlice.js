@@ -21,15 +21,22 @@ const userSlice = createSlice({
     },
     editUser: (state, action) => {
       const { id, name, email } = action.payload;
-      const editUser = state.find((user) => user.id == id);
-      if (editUser) {
-        editUser.name = name;
-        editUser.email = email;
+      const editObject = state.find((user) => user.id == id);
+      if (editObject) {
+        editObject.name = name;
+        editObject.email = email;
+      }
+    },
+    deleteUser(state, action) {
+      const { id } = action.payload;
+      const deleteObject = state.find((user) => user.id == id);
+      if (deleteObject) {
+        return state.filter((user) => user.id !== id);
       }
     },
   },
 });
 
-export const { addUser, editUser } = userSlice.actions;
+export const { addUser, editUser, deleteUser } = userSlice.actions;
 export const userState = (state) => state.users;
 export default userSlice.reducer;
