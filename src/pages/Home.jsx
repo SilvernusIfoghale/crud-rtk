@@ -18,19 +18,21 @@ const Home = () => {
           <td className="w-10 border-b-2 p-2">{index + 1}</td>
           <td className="w-32 border-b-2 p-2">{user.name}</td>
           <td className="w-40 border-b-2 p-2">{user.email}</td>
-          <td className="w-28 border-b-2 p-2 flex items-center justify-center">
-            <NavLink
-              to={`/edit/${user.id}`}
-              className="text-blue-500 text-2xl m-1 inline-block hover:scale-[110%]"
-            >
-              <FaEdit />
-            </NavLink>
-            <button
-              onClick={() => handleDelete(user.id)}
-              className="text-red-500 text-2xl m-1 hover:scale-[110%]"
-            >
-              <MdDeleteForever />
-            </button>
+          <td className="w-28 border-b-2 p-2 ">
+            <div className="flex items-center justify-center">
+              <NavLink
+                to={`/edit/${user.id}`}
+                className="text-blue-500 text-2xl m-1  inline-block hover:scale-[110%]"
+              >
+                <FaEdit />
+              </NavLink>
+              <button
+                onClick={() => handleDelete(user.id)}
+                className="text-red-500 text-2xl m-1 hover:scale-[110%]"
+              >
+                <MdDeleteForever />
+              </button>
+            </div>
           </td>
         </tr>
       </tbody>
